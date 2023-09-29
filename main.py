@@ -58,7 +58,7 @@ MISSING: Any = utils._MissingSentinel()
 
 
 
-ac = discord.Streaming(name = "", url = "")
+ac = discord.Streaming(name = "FreeAccount!", url = "https://www.youtube.com/shorts/dSrAIw_slh4")
 
 intents = discord.Intents.all()
 intents.message_content = True
@@ -79,7 +79,7 @@ intents.auto_moderation = True
 intents.webhooks = True
 intents.invites = True
 
-bot = commands.Bot(command_prefix = commands.when_mentioned_or("$"), owner_id = 868108080850812939, activity = ac, status = discord.Status.dnd, intents = intents)
+bot = commands.Bot(command_prefix = commands.when_mentioned_or("$"), activity = ac, status = discord.Status.dnd, intents = intents)
 
 bot._handlers = AntiSpamHandler(bot, library = Library.DPY)
 
