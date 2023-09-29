@@ -1,0 +1,6 @@
+{
+    "Token": "Your TOKEN here",
+    "Version": "1.0.0",
+    "GuildId": "Your guild id",
+    "TargetChannelID": target channel id like: 000000000000000
+}
