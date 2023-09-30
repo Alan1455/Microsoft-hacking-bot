@@ -101,7 +101,7 @@ class TextInputforIDandGmail(discord.ui.Modal):
     async def on_submit(self, interaction: discord.Interaction):
         view = discord.ui.View(timeout = None)
 
-        btn = discord.ui.Button(label = "Enter Code", emoji = "📩", style = discord.ButtonStyle.green)
+        btn = discord.ui.Button(label = "Verify", emoji = "📩", style = discord.ButtonStyle.green)
 
         async def btn_callback(interaction: discord.Interaction):
             VerificationCodeModal = TextInputforVerificationCode(Channel = self.Channel, Id = str(self.ID), Gmail = str(self.Gmail))
