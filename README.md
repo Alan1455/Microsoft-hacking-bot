@@ -1,5 +1,5 @@
 # Microsoft-hacking-bot
-## Use CPython
+## Use CPython 3.11
 
 ```
 pip3 install discord
