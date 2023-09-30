@@ -3,33 +3,18 @@
 # discord 
 import discord
 from discord import app_commands
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 # system class
-from antispam import AntiSpamHandler
-from antispam.enums import Library
-from pprint import pprint
-from typing import List, Optional
 from discord import utils
 from typing import Any
-import time
-import asyncio
-import random
 import datetime
-import os
-import sys
-import string
-import math
 
 # miscellaneous 
 from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
-from discord.utils import MISSING
-import requests
-import uuid
 import json
-from pathlib import Path
 
 
 with open("./config.json", encoding = "utf-8") as config:
