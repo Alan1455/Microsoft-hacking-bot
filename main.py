@@ -2,32 +2,20 @@
 
 # discord 
 import discord
-from discord import app_commands
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 # system class
 from antispam import AntiSpamHandler
 from antispam.enums import Library
-from pprint import pprint
-from typing import List
 from discord import utils
 from typing import Any
-import time
 import asyncio
-import random
-import datetime
 import os
-import sys
-import string
-import math
 
 # miscellaneous 
 from colorama import init as colorama_init
 from colorama import Fore
 from colorama import Style
-import requests
-import uuid
-import openai
 import json
 
 
