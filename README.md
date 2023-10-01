@@ -21,5 +21,6 @@ And open `config.json`
 ls
 
 python3 ./main.py
-
 ```
+
+enjoy!
