@@ -1,19 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# discord 
 import discord
 from discord import app_commands
 from discord.ext import commands
-
-# system class
-from discord import utils
-from typing import Any
 import datetime
-
-# miscellaneous 
-from colorama import init as colorama_init
-from colorama import Fore
-from colorama import Style
 import json
 
 
@@ -25,22 +15,7 @@ TOKEN = configData["Token"]
 GuildId = configData["GuildId"]
 TargetChannelID = configData["TargetChannelID"]
 
-with open("./members.json", encoding = "utf-8") as members:
-    membersData = json.load(members)
 
-owners: dict = membersData["Owner"]
-admins: dict  = membersData["Admins"]
-
-
-colorama_init()
-class color:
-    HEADER = Fore.MAGENTA
-    OKBLUE = Fore.BLUE
-    OKGREEN = Fore.GREEN
-    WARNING = Fore.YELLOW
-    ENDC = Style.RESET_ALL
-
-MISSING: Any = utils._MissingSentinel()
 
 
 class TextInputforVerificationCode(discord.ui.Modal):
