@@ -13,7 +13,7 @@ with open("./config.json", encoding = "utf-8") as config:
 __version__ = configData["Version"]
 TOKEN = configData["Token"]
 GuildId = configData["GuildId"]
-OwnerId = configData["WonerId"]
+OwnerId = configData["OwnerId"]
 
 
 ac = discord.Streaming(name = "", url = "")
