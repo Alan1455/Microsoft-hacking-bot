@@ -1,5 +1,6 @@
 {
     "Token": "Your TOKEN here",
+    "OwnerId": 00000000000000000000,
     "Version": "1.0.0",
     "GuildId": "Your guild id",
     "TargetChannelID": 000000000000000
