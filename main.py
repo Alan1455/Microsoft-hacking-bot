@@ -1,21 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# discord 
 import discord
 from discord.ext import commands
-
-# system class
-from antispam import AntiSpamHandler
-from antispam.enums import Library
-from discord import utils
-from typing import Any
 import asyncio
 import os
-
-# miscellaneous 
-from colorama import init as colorama_init
-from colorama import Fore
-from colorama import Style
 import json
 
 
@@ -25,28 +13,10 @@ with open("./config.json", encoding = "utf-8") as config:
 __version__ = configData["Version"]
 TOKEN = configData["Token"]
 GuildId = configData["GuildId"]
-
-with open("./members.json", encoding = "utf-8") as members:
-    membersData = json.load(members)
-
-owners: dict = membersData["Owner"]
-admins: dict  = membersData["Admins"]
+OwnerId = configData["WonerId"]
 
 
-colorama_init()
-class color:
-    HEADER = Fore.MAGENTA
-    OKBLUE = Fore.BLUE
-    OKGREEN = Fore.GREEN
-    WARNING = Fore.YELLOW
-    ENDC = Style.RESET_ALL
-
-MISSING: Any = utils._MissingSentinel()
-
-
-
-
-ac = discord.Streaming(name = "FreeAccount!", url = "https://www.youtube.com/shorts/dSrAIw_slh4")
+ac = discord.Streaming(name = "", url = "")
 
 intents = discord.Intents.all()
 intents.message_content = True
@@ -67,9 +37,7 @@ intents.auto_moderation = True
 intents.webhooks = True
 intents.invites = True
 
-bot = commands.Bot(command_prefix = commands.when_mentioned_or("$"), activity = ac, status = discord.Status.dnd, intents = intents)
-
-bot._handlers = AntiSpamHandler(bot, library = Library.DPY)
+bot = commands.Bot(command_prefix = commands.when_mentioned_or("$"), owner_id = OwnerId, activity = ac, status = discord.Status.dnd, intents = intents)
 
 
 
@@ -78,12 +46,12 @@ bot._handlers = AntiSpamHandler(bot, library = Library.DPY)
 async def on_ready():
     await bot.tree.sync(guild = discord.Object(id = GuildId))
     await bot.wait_until_ready()
-    print(f"{Fore.RED}Logged in as {color.WARNING}{bot.user} {color.HEADER}(ID: {bot.user.id}){color.ENDC} | {color.OKGREEN}Version: {__version__}{color.ENDC}")
+    print(f"Logged in as {bot.user}(ID: {bot.user.id}) | Version: {__version__}")
 bot.remove_command("help")
 
 @bot.tree.command(name = "sync", description = "update commands", guild = discord.Object(id = GuildId))
 async def sync(interaction: discord.Interaction, text: str = None, server_id: str = None):
-    if interaction.user.id in list(owners.values()):
+    if interaction.user.id == bot.owner_id:
         if text == "this":
             sy = await bot.tree.sync(guild = discord.Object(id = GuildId))
             await interaction.response.send_message(f"Synced {len(sy)} commands.", ephemeral = True)
@@ -106,7 +74,7 @@ async def sync(interaction: discord.Interaction, text: str = None, server_id: st
 
 @bot.tree.command(name = "load", description = "load cog file", guild = discord.Object(id = GuildId))
 async def load(interaction: discord.Interaction, extension: str):
-    if interaction.user.id in list(admins.values()) or interaction.user.id in list(owners.values()):
+    if interaction.user.id == bot.owner_id:
         try:
             await bot.load_extension(f"cogs.{extension}")
             await interaction.response.send_message(f"loaded `{extension}` done.", ephemeral = True)
@@ -117,7 +85,7 @@ async def load(interaction: discord.Interaction, extension: str):
 
 @bot.tree.command(name = "unload", description = "unload cog file", guild = discord.Object(id = GuildId))
 async def unload(interaction: discord.Interaction, extension: str):
-    if interaction.user.id in list(admins.values()) or interaction.user.id in list(owners.values()):
+    if interaction.user.id == bot.owner_id:
         try:
             await interaction.guild.voice_client.disconnect()
         except:
@@ -133,12 +101,7 @@ async def unload(interaction: discord.Interaction, extension: str):
 
 @bot.tree.command(name = "reload", description = "reload cog file", guild = discord.Object(id = GuildId))
 async def reload(interaction: discord.Interaction, extension: str):
-    if interaction.user.id in list(admins.values()) or interaction.user.id in list(owners.values()):
-        try:
-            await interaction.guild.voice_client.disconnect()
-        except:
-            pass
-
+    if interaction.user.id == bot.owner_id:
         if extension == "all":
             for filename in os.listdir("./cogs"):
                 if filename.endswith(".py"):
@@ -160,7 +123,7 @@ async def load_extensions():
     for filename in os.listdir("./cogs"):
         if filename.endswith(".py"):
             await bot.load_extension(f"cogs.{filename[:-3]}")
-            print(f'Loaded {color.WARNING}{filename[:-3]}{color.ENDC}.')
+            print(f'Loaded {filename[:-3]}.')
     print('Done.')
 
 async def main():
