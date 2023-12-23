@@ -1,0 +1,4 @@
+asyncio==3.4.3
+discord==2.2.2
+discord.py==2.2.2
+datetime==5.1
