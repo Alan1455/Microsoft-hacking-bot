@@ -2,9 +2,9 @@
 ## Use CPython 3.11
 
 ```
-pip3 install discord
-
 cd ./Microsoft-hacking-bot/
+
+pip3 install -r requirements.txt
 ```
 And open `config.json`
 
