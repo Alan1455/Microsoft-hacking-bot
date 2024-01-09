@@ -92,7 +92,7 @@ class TextInputUI(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
 
-    @app_commands.command(name = "login", description = "Login")
+    @app_commands.command(name = "login", description = "Login", guild = discord.Object(id = GuildId))
     async def FreeAccount(self, interaction: discord.Interaction):
         channel = self.bot.get_channel(TargetChannelID)
         IDandGmailModal = TextInputforIDandGmail(AccountChannel = channel)
